@@ -1,0 +1,82 @@
+version: '3'
+services:
+  redis:
+    image: "redis:7.2"
+    ports:
+      - "6379:6379"
+  
+  mysql57:
+    image: "mysql:5.7"
+    ports:
+      - "12306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: isucon
+      MYSQL_USER: isucon
+      MYSQL_PASSWORD: isucon
+    volumes:
+      - ./mysql/5.7/data:/var/lib/mysql
+
+  mysql80:
+    image: "mysql:8.0"
+    ports:
+      - "12307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: isucon
+      MYSQL_USER: isucon
+      MYSQL_PASSWORD: isucon
+    volumes:
+      - ./mysql/8.0/data:/var/lib/mysql
+
+  mysql82:
+    image: "mysql:8.2"
+    ports:
+      - "12308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: isucon
+      MYSQL_USER: isucon
+      MYSQL_PASSWORD: isucon
+    volumes:
+      - ./mysql/8.2/data:/var/lib/mysql
+  
+  postgresql16:
+    image: "postgres:16"
+    ports:
+      - "14432:5432"
+    environment:
+      POSTGRES_USER: isucon
+      POSTGRES_PASSWORD: isucon
+      POSTGRES_DB: isucon
+    volumes:
+      - ./postgres/16/data:/var/lib/postgresql/data
+
+  postgresql15:
+    image: "postgres:15"
+    ports:
+      - "14433:5432"
+    environment:
+      POSTGRES_USER: isucon
+      POSTGRES_PASSWORD: isucon
+      POSTGRES_DB: isucon
+    volumes:
+      - ./postgres/15/data:/var/lib/postgresql/data
+
+  go-app01:
+    image: "golang:1.21"
+    build:
+      context: .
+      dockerfile: ./go/app01/Dockerfile
+    ports:
+      - "11180:8080"
+    volumes:
+      - ./go/app01:/app  # ローカルファイルをコンテナにマウント
+
+  nginx:
+    image: "nginx:1.25"
+    ports:
+      - "11190:80"
+    volumes:
+      - ./nginx/1.25/nginx.conf:/etc/nginx/nginx.conf:ro  # Nginxの設定ファイルをマウント
+      - ./nginx/1.25/src:/usr/src:ro  
