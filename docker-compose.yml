@@ -40,17 +40,6 @@ services:
     volumes:
       - ./postgres/16/data:/var/lib/postgresql/data
 
-  postgresql15:
-    image: "postgres:15"
-    ports:
-      - "14433:5432"
-    environment:
-      POSTGRES_USER: isucon
-      POSTGRES_PASSWORD: isucon
-      POSTGRES_DB: isucon
-    volumes:
-      - ./postgres/15/data:/var/lib/postgresql/data
-
   go-app01:
     image: "golang:1.21"
     build:
