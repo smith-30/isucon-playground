@@ -5,18 +5,6 @@ services:
     ports:
       - "6379:6379"
   
-  mysql80:
-    image: "mysql:8.0"
-    ports:
-      - "12307:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: isucon
-      MYSQL_USER: isucon
-      MYSQL_PASSWORD: isucon
-    volumes:
-      - ./mysql/8.0/data:/var/lib/mysql
-
   mysql82:
     image: "mysql:8.2"
     ports:
