@@ -29,7 +29,7 @@ services:
       - ./postgres/16/data:/var/lib/postgresql/data
 
   go-app01:
-    image: "golang:1.21"
+    image: "golang:1.25"
     build:
       context: .
       dockerfile: ./go/app01/Dockerfile
