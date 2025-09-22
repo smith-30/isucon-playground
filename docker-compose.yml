@@ -39,7 +39,7 @@ services:
       - ./go/app01:/app  # ローカルファイルをコンテナにマウント
 
   nginx:
-    image: "nginx:1.25"
+    image: "nginx:1.29"
     ports:
       - "11190:80"
     volumes:
